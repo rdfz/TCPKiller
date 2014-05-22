@@ -5,9 +5,11 @@ import time
 from tkinter import *
 
 shouldq=0
-xs=7 #x-size
-ys=5 #y-size
-t=5 #error-delay-time
+xs=10 #x-size
+ys=7 #y-size
+t=1 #error-delay-time
+host='127.0.0.1' #target-hostname
+port=4567 #target-port
 ver='1.0' #version
 
 def k(y,x):
@@ -16,14 +18,14 @@ def k(y,x):
     while shouldq==0:
         try:
             s=socket.socket()
-            s.connect(('127.0.0.1',25565))
+            s.connect((host,port))
             s.close()
         except:
             sta[y][x]['text']='！！'
-            time.sleep(2)
+            time.sleep(t)
             sta[y][x]['text']='－－'
     sta[y][x]['text']='＋＋'
-    threading.exit()
+    return
 
 def st():
     global shouldq
@@ -48,3 +50,5 @@ bk=Button(tk,text='结束',command=kill)
 bk.grid(column=xs+1,row=1)
 tk.title('TCPKiller '+ver)
 mainloop()
+kill()
+while(threading.activeCount()>2):pass
