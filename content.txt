@@ -1,0 +1,11 @@
+GET http://www.baidu.com/ HTTP/1.1
+Host: www.baidu.com
+Connection: keep-alive
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.137 Safari/537.36
+DNT: 1
+Referer: http://baidu.com/
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: zh-CN,zh;q=0.8,en;q=0.6
+Cookie: BAIDUID=578FAF1AA111A83B245C138661C31AE1:FG=1; BDUSS=RpWlVaTlZ-TVB3a3FWWTBHekNRT0ZQSGhEYkpTeFFteTBET2tmdkpEUG9MNkJUQVFBQUFBJCQAAAAAAAAAAAEAAABPm6wHeGlhb3l1YW5hbjIwMDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOiieFPoonhTN0; cflag=65535%3A1
+
