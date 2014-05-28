@@ -6,8 +6,8 @@ import sys
 from tkinter import *
 
 shouldq=0
-xs=10 #x-size
-ys=7 #y-size
+xs=15 #x-size
+ys=10 #y-size
 t=1 #error-delay-time
 ver='2.0' #version
 inited=False
@@ -88,12 +88,15 @@ def test():
 def init():
     global hostvar,portvar,setup
     setup=Tk()
+    
     hostvar=StringVar() #target-hostname
+    hostvar.set('www.horizononline.com')
     portvar=IntVar() #target-port
+    portvar.set(80)
 
     ipselect=Entry(setup,textvariable=hostvar)
     portselect=Entry(setup,textvariable=portvar)
-    setupdone=Button(setup,text='保存',command=initt)
+    setupdone=Button(setup,text='完成(内部神通专版)',command=initt)
 
     setup.title('设置')
     setup.resizable(False,False)
