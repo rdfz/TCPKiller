@@ -1,10 +1,2 @@
-GET http://horizononline.cn/?s=%E6%88%91%E5%8F%88%E6%9D%A5%E4%BA%86%27+or+1%3D1 HTTP/1.1
-Host: horizononline.cn
-Connection: keep-alive
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.137 Safari/537.36
-DNT: 1
-Referer: http://horizononline.cn/%e5%85%b3%e4%ba%8e%e6%88%91%e4%bb%ac/
-Accept-Encoding: gzip,deflate,sdch
-Accept-Language: zh-CN,zh;q=0.8,en;q=0.6%25e5%2585%25b3%25e4%25ba%258e%25e6%2588%2591%25e4%25bb%25ac/%22%3A%228%7C1401354237334%22%7D
+GET http://github.com HTTTP/1.1
 
